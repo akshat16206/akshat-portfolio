@@ -26,6 +26,7 @@ const Portfolio = () => {
       title: "Ethereum ToDo List - Decentralized Application",
       description: "A full-stack decentralized ToDo List dApp built with Solidity, Truffle, and Web3.js. Users can manage tasks on the Ethereum blockchain with MetaMask integration.",
       tech: ["Solidity", "Truffle", "Web3.js", "MetaMask", "Ganache", "HTML/CSS"],
+      link: "https://github.com/akshat16206/eth-to-do-list",
       features: [
         "Immutable task storage on Ethereum blockchain",
         "MetaMask wallet integration for secure transactions",
@@ -38,6 +39,7 @@ const Portfolio = () => {
       title: "Blockchain Simulation - Python Project",
       description: "A Python-based blockchain simulator demonstrating core blockchain concepts including blocks, hashing, and proof-of-work for data integrity and security.",
       tech: ["Python", "SHA-256", "Cryptography"],
+      link: "https://github.com/akshat16206/blockchain-stimulation", 
       features: [
         "SHA-256 hashing implementation",
         "Proof-of-work consensus mechanism",
@@ -50,6 +52,7 @@ const Portfolio = () => {
       title: "AI-ChatBot - Python Project",
       description: "A terminal-based AI chatbot integrating OpenAI and Anthropic APIs with enhanced information retrieval capabilities through Wikipedia and DuckDuckGo integration.",
       tech: ["Python", "LangChain", "OpenAI API", "Anthropic API"],
+      link: "https://github.com/akshat16206/AI-chat-box", 
       features: [
         "Modular chatbot architecture using LangChain",
         "Multi-API support (OpenAI & Anthropic)",
@@ -62,6 +65,7 @@ const Portfolio = () => {
       title: "Cyber Threat Detector - Python Project",
       description: "An AI-powered cybersecurity tool that detects real-time threats and uses blockchain technology for secure, anonymous vulnerability reporting.",
       tech: ["Python", "Machine Learning", "Blockchain", "AI"],
+      link: "https://github.com/akshat16206/hackathon",
       features: [
         "Real-time cyber threat detection",
         "Machine learning pattern recognition",
@@ -137,16 +141,16 @@ const Portfolio = () => {
           </p>
           
           <div className="flex justify-center space-x-6 mb-12">
-            <a href="https://github.com/akshat8036" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://github.com/akshat16206" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Github className="w-6 h-6 text-amber-700" />
             </a>
-            <a href="https://linkedin.com/in/akshat-gupta" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://www.linkedin.com/in/hermits/" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Linkedin className="w-6 h-6 text-amber-700" />
             </a>
-            <a href="https://twitter.com/akshat8036" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://x.com/akshat8036" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Twitter className="w-6 h-6 text-amber-700" />
             </a>
-            <a href="https://instagram.com/akshat8036" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://www.instagram.com/a_kshat007/" className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Instagram className="w-6 h-6 text-amber-700" />
             </a>
           </div>
