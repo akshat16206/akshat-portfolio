@@ -302,16 +302,16 @@ const Portfolio = () => {
           </div>
           
           <div className="flex justify-center space-x-6">
-            <a href="https://github.com/akshat8036" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://github.com/akshat16206" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Github className="w-8 h-8 text-amber-700" />
             </a>
-            <a href="https://linkedin.com/in/akshat-gupta" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://www.linkedin.com/in/hermits/" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Linkedin className="w-8 h-8 text-amber-700" />
             </a>
-            <a href="https://twitter.com/akshat8036" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://x.com/akshat8036" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Twitter className="w-8 h-8 text-amber-700" />
             </a>
-            <a href="https://instagram.com/akshat8036" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <a href="https://www.instagram.com/a_kshat007/" className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
               <Instagram className="w-8 h-8 text-amber-700" />
             </a>
           </div>
