@@ -22,6 +22,32 @@ const Portfolio = () => {
   };
 
   const projects = [
+   {
+  title: "Idea Capture AI - Offline Voice-to-Text Notebook",
+  description: "A fully offline AI assistant that captures your spoken ideas, transcribes them using whisper.cpp, summarizes them with llama.cpp + Mistral, and saves them in a searchable local notebook.",
+  tech: ["Python", "whisper.cpp", "llama.cpp", "Mistral 7B", "JSON"],
+  link: "https://github.com/akshat16206/idea-capture-ai",
+  features: [
+    "Real-time voice recording with Python and sounddevice",
+    "Offline transcription using whisper.cpp (no internet/API)",
+    "Summarization using local LLM (llama.cpp + Mistral)",
+    "Ideas auto-saved into JSON with timestamp and summary",
+    "Search interface to retrieve ideas via keywords"
+  ]
+},
+    {
+      title: "AI-ChatBot - Python Project",
+      description: "A terminal-based AI chatbot integrating OpenAI and Anthropic APIs with enhanced information retrieval capabilities through Wikipedia and DuckDuckGo integration.",
+      tech: ["Python", "LangChain", "OpenAI API", "Anthropic API"],
+      link: "https://github.com/akshat16206/AI-chat-box", 
+      features: [
+        "Modular chatbot architecture using LangChain",
+        "Multi-API support (OpenAI & Anthropic)",
+        "Wikipedia and DuckDuckGo tool integration",
+        "Secure environment-based API configuration",
+        "Command-line interface design"
+      ]
+    },
     {
       title: "Ethereum ToDo List - Decentralized Application",
       description: "A full-stack decentralized ToDo List dApp built with Solidity, Truffle, and Web3.js. Users can manage tasks on the Ethereum blockchain with MetaMask integration.",
@@ -49,19 +75,6 @@ const Portfolio = () => {
       ]
     },
     {
-      title: "AI-ChatBot - Python Project",
-      description: "A terminal-based AI chatbot integrating OpenAI and Anthropic APIs with enhanced information retrieval capabilities through Wikipedia and DuckDuckGo integration.",
-      tech: ["Python", "LangChain", "OpenAI API", "Anthropic API"],
-      link: "https://github.com/akshat16206/AI-chat-box", 
-      features: [
-        "Modular chatbot architecture using LangChain",
-        "Multi-API support (OpenAI & Anthropic)",
-        "Wikipedia and DuckDuckGo tool integration",
-        "Secure environment-based API configuration",
-        "Command-line interface design"
-      ]
-    },
-    {
       title: "Cyber Threat Detector - Python Project",
       description: "An AI-powered cybersecurity tool that detects real-time threats and uses blockchain technology for secure, anonymous vulnerability reporting.",
       tech: ["Python", "Machine Learning", "Blockchain", "AI"],
@@ -77,10 +90,10 @@ const Portfolio = () => {
   ];
 
   const skills = {
-    "Programming Languages": ["Python", "C", "C++", "JavaScript", "TypeScript", "SQL", "PostgreSQL", "Solidity", "Rust"],
-    "Frameworks & Libraries": ["React", "Flask", "Django", "LangChain", "Tkinter"],
-    "Tools & Technologies": ["Docker", "AWS", "Truffle", "Ganache", "Git"],
-    "Specialized Skills": ["Blockchain Development", "Machine Learning", "LLM Integration", "Smart Contracts", "Web3"]
+    "Programming Languages": ["Python", "C", "C++", "JavaScript", "TypeScript", "SQL", "PostgreSQL", "Solidity", "Rust","JSON"],
+    "Frameworks & Libraries": ["React", "Flask", "Django", "LangChain", "Tkinter","LLM"],
+    "Tools & Technologies": ["Docker", "AWS", "Truffle", "Ganache", "Git","kubernetes"],
+    "Specialized Skills": ["Blockchain Development", "Machine Learning", "LLM Integration", "Smart Contracts", "Web3","whisper.cpp","llama.cpp + Mistral 7B",'']
   };
 
   const softSkills = [
@@ -215,7 +228,9 @@ const Portfolio = () => {
               <div key={index} className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-2xl font-bold text-amber-800">{project.title}</h3>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-6 h-6 text-amber-600 cursor-pointer hover:text-amber-700" />
+                  </a>
                 </div>
                 
                 <p className="text-amber-700 mb-6 leading-relaxed">{project.description}</p>
