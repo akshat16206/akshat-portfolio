@@ -136,7 +136,7 @@ const Portfolio = () => {
             </h1>
             <div className="flex items-center justify-center space-x-8 mb-6">
               <div className="text-right">
-                <h2 className="text-2xl md:text-3xl text-amber-700 font-light">Web3</h2>
+                <h2 className="text-2xl md:text-3xl text-amber-700 font-light">Blockchain</h2>
                 <p className="text-amber-600">Enthusiast</p>
               </div>
               <div className="w-32 h-32 bg-gradient-to-br from-amber-300 to-orange-300 rounded-full flex items-center justify-center">
