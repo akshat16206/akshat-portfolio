@@ -243,7 +243,7 @@ const Portfolio = () => {
             </h1>
             <div className="flex items-center justify-center space-x-8 mb-6">
               <div className="text-right">
-                <h2 className="text-2xl md:text-3xl text-black-700 font-light">Blockchain</h2>
+                <h2 className="text-2xl md:text-3xl text-black-700 font-light">DeepLearning</h2>
                 <p className="text-black-600">Enthusiast</p>
               </div>
               <div className="w-32 h-32 bg-gradient-to-br from-black to-white rounded-full flex items-center justify-center">
