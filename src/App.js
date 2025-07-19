@@ -565,9 +565,9 @@ const Portfolio = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black-800 text-white py-8 px-6">
+      <footer className="bg-black-800 text-white-0 py-8 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="mb-4">&copy; 2024 Akshat Gupta. All rights reserved.</p>
+          <p className="mb-4">&copy; 2025 Akshat Gupta. All rights reserved.</p>
           <p className="text-black-200">Built with React • Designed with passion</p>
         </div>
       </footer>
