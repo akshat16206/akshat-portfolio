@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Twitter, Instagram, Mail, Phone, MapPin, ExternalLink, Code, Globe, Users, Clock, Target, Lightbulb, Moon, Sun } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  // --- EDITED LINE: Set 'classic_bw' as the default theme ---
   const [theme, setTheme] = useState('classic_bw'); // 'light' or 'classic_bw'
+  
+  // Ref for the canvas element
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +16,123 @@ const Portfolio = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // --- Particle Dots Effect ---
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const mouse = {
+      x: null,
+      y: null,
+      radius: 150 // Area of attraction
+    };
+
+    const handleMouseMove = (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    let particlesArray = [];
+
+    class Particle {
+      constructor(x, y, size, color, weight) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+        this.weight = weight; // How much it's affected by the cursor
+        this.baseX = this.x;
+        this.baseY = this.y;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+
+      update() {
+        // Calculate distance from mouse
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        
+        // The force is stronger the closer the particle is to the mouse
+        let force = (mouse.radius - distance) / mouse.radius;
+        if (force < 0) force = 0;
+
+        // Apply the force towards the mouse
+        let directionX = forceDirectionX * force * this.weight;
+        let directionY = forceDirectionY * force * this.weight;
+
+        if (distance < mouse.radius) {
+          this.x -= directionX;
+          this.y -= directionY;
+        } else {
+          // If outside the radius, gently return to base position
+          if (this.x !== this.baseX) {
+            let dx_base = this.x - this.baseX;
+            this.x -= dx_base / 10;
+          }
+          if (this.y !== this.baseY) {
+            let dy_base = this.y - this.baseY;
+            this.y -= dy_base / 10;
+          }
+        }
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      let numberOfParticles = (canvas.height * canvas.width) / 9000;
+      for (let i = 0; i < numberOfParticles; i++) {
+        let size = (Math.random() * 1.5) + 1;
+        let x = (Math.random() * ((window.innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((window.innerHeight - size * 2) - (size * 2)) + size * 2);
+        let color = 'rgba(200, 200, 200, 0.4)';
+        let weight = 1 + Math.random() * 2;
+        particlesArray.push(new Particle(x, y, size, color, weight));
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    const handleResize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        mouse.radius = 150;
+        init();
+    }
+    
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
+
+  }, []); // Empty array ensures this effect runs only once on mount.
+
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -140,6 +259,22 @@ const Portfolio = () => {
   const GlobalStyles = () => (
     <style>{`
       /* --- GLOBAL STYLES --- */
+      
+      #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+      }
+      
+      /* Ensure main content appears above the particle canvas */
+      nav, section, footer {
+        position: relative;
+        z-index: 2;
+      }
 
       /* Texture Overlay Effect */
       .bg-texture-overlay::before {
@@ -153,7 +288,7 @@ const Portfolio = () => {
         background-repeat: repeat;
         opacity: 0.04; 
         pointer-events: none;
-        z-index: -1;
+        z-index: 0; /* Behind canvas and content */
       }
       
       /* Apply classic font to all headings, regardless of theme */
@@ -161,23 +296,15 @@ const Portfolio = () => {
         font-family: 'Georgia', 'Times New Roman', serif;
       }
 
-      /* 3D Card Effect Setup */
-      .project-grid, .skills-grid, .contact-grid {
-        perspective: 1200px;
-      }
-      .card-3d {
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        transform-style: preserve-3d;
-      }
-      .card-3d:hover {
-        transform: rotateY(-7deg) rotateX(4deg) scale(1.03);
-      }
-
       /* --- CLASSIC B&W THEME --- */
       .theme-classic-bw {
         background: #212121;
         color: #f0f0f0;
         font-family: 'Georgia', serif;
+      }
+      .theme-classic-bw #particle-canvas {
+        /* Optional: make particles slightly different on dark theme */
+        /* For now, they will have the same color */
       }
       /* Increase texture opacity for dark theme */
       .theme-classic-bw.bg-texture-overlay::before {
@@ -200,17 +327,14 @@ const Portfolio = () => {
       .theme-classic-bw .bg-black-400 { background-color: #666; }
       .theme-classic-bw .text-white { color: #111; }
       .theme-classic-bw .w-32.h-32.bg-gradient-to-br { background: linear-gradient(to br, #eee, #999); }
-      
-      .theme-classic-bw .card-3d:hover {
-        transform: rotateY(-8deg) rotateX(5deg) scale(1.03);
-        box-shadow: 0 25px 45px -15px rgba(0,0,0,0.7);
-      }
     `}</style>
   );
 
   return (
     <div className={`${theme === 'classic_bw' ? 'theme-classic-bw' : 'bg-gradient-to-br from-black-50 via-yellow-50 to-orange-50'} bg-texture-overlay`}>
+      <canvas ref={canvasRef} id="particle-canvas" />
       <GlobalStyles />
+      
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-6 py-4">
@@ -327,12 +451,12 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 bg-white/30">
+      <section id="projects" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-black-800 text-center mb-16">My Work</h2>
-          <div className="project-grid grid gap-8">
+          <div className="grid gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="card-3d bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl">
+              <div key={index} className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-2xl font-bold text-black-800">{project.title}</h3>
                   <a href={project.link} target="_blank" rel="noopener noreferrer">
@@ -371,9 +495,9 @@ const Portfolio = () => {
       <section id="skills" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-black-800 text-center mb-16">Technical Skills</h2>
-          <div className="skills-grid grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {Object.entries(skills).map(([category, skillList], index) => (
-              <div key={index} className="card-3d bg-white rounded-2xl p-8 shadow-xl">
+              <div key={index} className="bg-white rounded-2xl p-8 shadow-xl">
                 <div className="flex items-center mb-6">
                   <div className="w-3 h-8 bg-black-400 rounded-full mr-4"></div>
                   <h3 className="text-xl font-bold text-black-800">{category}</h3>
@@ -392,15 +516,15 @@ const Portfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 bg-white/30">
+      <section id="contact" className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-black-800 mb-8">Get In Touch</h2>
           <p className="text-lg text-black-700 mb-12 max-w-2xl mx-auto">
             I'm always open to discussing new opportunities, interesting projects, or just having a conversation about technology and innovation. Feel free to reach out!
           </p>
           
-          <div className="contact-grid grid md:grid-cols-3 gap-8 mb-12">
-            <div className="card-3d bg-white rounded-2xl p-6 shadow-xl">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white rounded-2xl p-6 shadow-xl">
               <Mail className="w-8 h-8 text-black-600 mx-auto mb-4" />
               <h3 className="font-semibold text-black-800 mb-2">Email</h3>
               <a href="mailto:akshat8036@gmail.com" className="text-black-600 hover:text-black-700">
@@ -408,7 +532,7 @@ const Portfolio = () => {
               </a>
             </div>
             
-            <div className="card-3d bg-white rounded-2xl p-6 shadow-xl">
+            <div className="bg-white rounded-2xl p-6 shadow-xl">
               <Phone className="w-8 h-8 text-black-600 mx-auto mb-4" />
               <h3 className="font-semibold text-black-800 mb-2">Phone</h3>
               <a href="tel:+919120692201" className="text-black-600 hover:text-black-700">
@@ -416,7 +540,7 @@ const Portfolio = () => {
               </a>
             </div>
             
-            <div className="card-3d bg-white rounded-2xl p-6 shadow-xl">
+            <div className="bg-white rounded-2xl p-6 shadow-xl">
               <MapPin className="w-8 h-8 text-black-600 mx-auto mb-4" />
               <h3 className="font-semibold text-black-800 mb-2">Location</h3>
               <p className="text-black-600">Madhya Pradesh, India</p>
