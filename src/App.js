@@ -148,6 +148,19 @@ const Portfolio = () => {
 
   const projects = [
     {
+  "title": "SylvaCarbon - AI Pipeline for Carbon Credit Estimation",
+  "description": "An end-to-end pipeline to estimate a tree's carbon credit value from an image. The project's main achievement is a robust data engineering script that processes and merges the complex NEON scientific dataset, preparing it for a multi-task PyTorch model.",
+  "tech": ["Python", "PyTorch", "Pandas", "NumPy", "scikit-learn", "Pillow"],
+  "link": "https://huggingface.co/hermits001/SylvaCarbon-0",
+  "features": [
+    "Engineered a data pipeline to automatically load, merge, and clean over 180 disconnected scientific CSV files from the NEON dataset.",
+    "Built a multi-task computer vision model with a ResNet backbone in PyTorch to simultaneously predict a tree's DBH, height, and species.",
+    "Implemented a validation strategy using placeholder images to prove the end-to-end functionality of the system before integrating real geospatial data.",
+    "Applied scientific allometric equations to convert the model's physical predictions into a final, estimated CO2 sequestration value.",
+    "Open-sourced the complete, runnable pipeline and a pre-trained model on Hugging Face."
+  ]
+},
+    {
   "title": "Handwritten Digit Recognition - Neural Network from Scratch",
   "description": "A neural network-based system to recognize handwritten digits (MNIST) using custom-built models with 0, 1, and 2 hidden layers. Designed to explore learning behavior through visualizations and mathematical understanding.",
   "tech": ["Python", "TensorFlow", "NumPy", "Matplotlib", "Seaborn", "Maths"],
@@ -242,7 +255,7 @@ const Portfolio = () => {
 
   const skills = {
     "Programming Languages": ["Python", "C", "C++", "JavaScript", "TypeScript", "SQL", "PostgreSQL", "Solidity", "Rust","JSON"],
-    "Frameworks & Libraries": ["React", "Flask", "Django", "LangChain", "Tkinter","LLM","Pandas","Numpy","Seaborn","Matplotlib","Tensorflow","ScikitLearn"],
+    "Frameworks & Libraries": ["React", "Flask", "Django", "LangChain", "Tkinter","LLM","Pandas","Numpy","Seaborn","Matplotlib","Tensorflow","ScikitLearn","Pytorch"],
     "Tools & Technologies": ["Docker", "AWS","Data Analytics","Truffle", "Ganache", "Git","kubernetes","Keras","TensorBoard","Jupyter Notebook","Pyenv","Rest API"],
     "Specialized Skills": [ "Machine Learning", "LLM Integration", "Smart Contracts", "Web3","DeepLearning","Neural Networks","Mathematics with Applications in Finance","Natural Language Processing (NLP)","Generative AI","Model Evaluation and Improvement","Speech Recognition","Blockchain Development"]
   };
